@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const Sidebar = () => {
-  const pathname = usePathname();
+const Sidebar = ({ currentTab, setCurrentTab, sidebarLinks }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const trigger = useRef(null);
@@ -58,7 +57,7 @@ const Sidebar = () => {
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <Link href="/" className=" flex justify-center items-center gap-3 mt-5">
           <img src={"/logo.png"} alt="Logo" className="w-[40px]" />
           <h1 className="text-[#fff] text-lg font-semibold">
@@ -96,32 +95,17 @@ const Sidebar = () => {
           {/* <!-- Menu Group --> */}
           <div>
             <ul className="mb-6 flex flex-col gap-1.5">
-              <li>
-                <div
-                  href="/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 `}
+              {sidebarLinks.map((item, index) => (
+                <li
+                  onClick={() => setCurrentTab(index)}
+                  key={index}
+                  className={`group ${
+                    currentTab === index && "underline text-[15px]"
+                  }  cursor-pointer relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium duration-300 ease-in-out  `}
                 >
-                  My Uploaded Health Data
-                </div>
-              </li>
-
-              <li>
-                <div
-                  href="/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 `}
-                >
-                  {`Data I've Granted Access`}
-                </div>
-              </li>
-
-              <li>
-                <div
-                  href="/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4`}
-                >
-                  Data Shared with Me
-                </div>
-              </li>
+                  {item.linkText}
+                </li>
+              ))}
             </ul>
           </div>
         </nav>

@@ -99,12 +99,15 @@ const Header = () => {
                 </div>
               )}
 
-              <button
-                className="outline-none lg:text-base text-[14px] py-[5px] sm:py-2 px-3 sm:px-4  rounded-md bg-[#156b6e] text-[#fff]"
-                onClick={() => router.push("/dashboard")}
-              >
-                Dashboard
-              </button>
+              {isConnected && (
+                <button
+                  className="outline-none lg:text-base text-[14px] py-[5px] sm:py-2 px-3 sm:px-4  rounded-md bg-[#156b6e] text-[#fff]"
+                  onClick={() => router.push("/dashboard")}
+                >
+                  Dashboard
+                </button>
+              )}
+
               <img
                 src="/images/toggle__open.png"
                 alt="logo"
