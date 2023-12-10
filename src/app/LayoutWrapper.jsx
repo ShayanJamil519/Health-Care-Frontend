@@ -1,11 +1,13 @@
 "use client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Header from "@/components/Shared/Header";
 import { usePathname } from "next/navigation";
+import Header from "@/components/Shared/Header";
 import Footer from "@/components/Shared/Footer";
+
 import { WagmiConfig, createConfig, mainnet, sepolia } from "wagmi";
 import { createPublicClient, http } from "viem";
+
 const config = createConfig({
   autoConnect: true,
   publicClient: createPublicClient({

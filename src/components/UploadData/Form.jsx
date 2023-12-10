@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Input from "../Shared/Input";
 import { IoIosArrowRoundForward } from "react-icons/io";
+import Input from "../Shared/Input";
 
 const Form = () => {
   const [selectedOption, setSelectedOption] = useState(null);
