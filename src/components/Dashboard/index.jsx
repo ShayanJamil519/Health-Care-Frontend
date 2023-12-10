@@ -1,16 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
-import Table from "./Table";
 import Link from "next/link";
+import UploadedHealthDataTable from "./UploadedHealthDataTable";
+import DataSharedWithMeTable from "./DataSharedWithMeTable";
 
 const sidebarLinks = [
   {
     linkText: `My Uploaded Health Data`,
   },
-  {
-    linkText: `Data I've Granted Access`,
-  },
+
   {
     linkText: `Data Shared with Me`,
   },
@@ -33,10 +32,16 @@ const Dashboard = () => {
             <Link href="/" className="text-lg font-poppins mr-2">
               Home {` > `}
             </Link>
-            {sidebarLinks[currentTab].linkText}
+            <span className="font-normal text-[15px]">
+              {" "}
+              {sidebarLinks[currentTab].linkText}
+            </span>
           </h1>
         </div>
-        <div className="p-10">{currentTab === 0 && <Table />}</div>
+        <div className="p-10">
+          {currentTab === 0 && <UploadedHealthDataTable />}
+          {currentTab === 1 && <DataSharedWithMeTable />}
+        </div>
       </div>
     </div>
   );

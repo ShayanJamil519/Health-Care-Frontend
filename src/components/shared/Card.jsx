@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = () => {
   return (
-    <div className="w-[30%] rounded-lg shadow-md font-poppins py-10 px-7 text-center">
+    <div className="w-[30%] rounded-lg shadow-md hover:shadow-xl duration-800  font-poppins py-7 px-5 text-center">
       <p className="flex justify-start items-center gap-3 mb-1">
         <span className="font-semibold">Name: </span>ABC Data
       </p>
