@@ -1,5 +1,5 @@
-import Form from "@/components/UploadData/Form";
 import Hero from "@/components/Shared/Hero";
+import Form from "@/components/UploadData/Form";
 import React from "react";
 
 const page = () => {
