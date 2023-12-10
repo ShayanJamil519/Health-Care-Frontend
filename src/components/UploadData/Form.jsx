@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import Input from "../shared/Input";
+import Input from "../Shared/Input";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Form = () => {

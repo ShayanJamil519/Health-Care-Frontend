@@ -1,4 +1,4 @@
-import DataForSale from "@/components/shared/DataForSale";
+import DataForSale from "@/components/Shared/DataForSale";
 import Hero from "@/components/Home/Hero";
 
 export default function Home() {

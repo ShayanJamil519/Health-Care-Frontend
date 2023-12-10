@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/Shared/Header";
 import { usePathname } from "next/navigation";
-import Footer from "@/components/shared/Footer";
+import Footer from "@/components/Shared/Footer";
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();

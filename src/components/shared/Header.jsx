@@ -28,37 +28,47 @@ const Header = () => {
     <div className=" bg-[#ffffff] font-poppins py-3">
       <div className="w-[90%] md:w-[90%] mx-auto flex justify-between items-center">
         <div className="flex w-full justify-between items-center gap-16">
-          <Link href="/" className="lg:block hidden">
+          <Link
+            href="/"
+            className="lg:flex justify-start items-center gap-3 hidden"
+          >
             <img src="/logo.png" alt="logo" className="w-[50px]" />
+            <p className="text-[#156b6e] font-semibold font-poppins">
+              MediChain Access
+            </p>
           </Link>
-          <Link href="/" className="lg:hidden block">
+          <Link
+            href="/"
+            className="lg:hidden flex justify-start items-center gap-3"
+          >
             <img src="logo__small.png" alt="logo" className="w-[50px]" />
+            <p className="text-[#156b6e] font-semibold font-poppins">
+              MediChain Access
+            </p>
           </Link>
-          <div className="hidden lg:flex justify-start items-center gap-10">
-            <div className="flex justify-start items-center gap-10">
-              {headerLinks.map((item, index) => (
-                <div
+          <div className="hidden lg:flex justify-center gap-16 items-center">
+            {headerLinks.map((item, index) => (
+              <div
+                key={index}
+                className="flex justify-start items-start flex-col"
+              >
+                <Link
+                  className={`${
+                    pathname === item.linkTo
+                      ? "text-[#3eb8bd]"
+                      : "text-[#156b6e]"
+                  }`}
                   key={index}
-                  className="flex justify-start items-start flex-col"
+                  href={item.linkTo}
                 >
-                  <Link
-                    className={`${
-                      pathname === item.linkTo
-                        ? "text-[#3eb8bd]"
-                        : "text-[#156b6e]"
-                    }`}
-                    key={index}
-                    href={item.linkTo}
-                  >
-                    {item.linkText}
-                  </Link>
+                  {item.linkText}
+                </Link>
 
-                  {pathname === item.linkTo && (
-                    <div className="bg-[#156b6e] h-[1px] w-[80%]"></div>
-                  )}
-                </div>
-              ))}
-            </div>
+                {pathname === item.linkTo && (
+                  <div className="bg-[#156b6e] h-[1px] w-[80%]"></div>
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="flex justify-between items-center gap-3 md:gap-5">
