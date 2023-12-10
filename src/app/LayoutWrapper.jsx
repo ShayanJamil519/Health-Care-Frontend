@@ -4,15 +4,26 @@ import "react-toastify/dist/ReactToastify.css";
 import Header from "@/components/Shared/Header";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Shared/Footer";
+import { WagmiConfig, createConfig, mainnet, sepolia } from "wagmi";
+import { createPublicClient, http } from "viem";
+const config = createConfig({
+  autoConnect: true,
+  publicClient: createPublicClient({
+    chain: sepolia,
+    transport: http(),
+  }),
+});
 
 export default function LayoutWrapper({ children }) {
   const pathname = usePathname();
   return (
     <>
-      <ToastContainer position="top-right" autoClose={3000} />
-      {!pathname?.includes("/dashboard") && <Header />}
-      {children}
-      {!pathname?.includes("/dashboard") && <Footer />}
+      <WagmiConfig config={config}>
+        <ToastContainer position="top-right" autoClose={3000} />
+        {!pathname?.includes("/dashboard") && <Header />}
+        {children}
+        {!pathname?.includes("/dashboard") && <Footer />}
+      </WagmiConfig>
     </>
   );
 }

@@ -3,6 +3,9 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 
+import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+
 const headerLinks = [
   {
     linkText: "Upload Data",
@@ -23,6 +26,12 @@ const Header = () => {
   const handleNavbar = () => {
     setOpenNavbar(!openNavbar);
   };
+
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
 
   return (
     <div className=" bg-[#ffffff] font-poppins py-3">
@@ -76,6 +85,20 @@ const Header = () => {
               {/* <button className="hidden lg:block outline-none border-[1px] py-2 px-4 rounded-[40px] border-[#fff] text-[#fff]">
                 <Link href="/promotion">Promote My Business</Link>
               </button> */}
+              {!address ? (
+                <button
+                  className="outline-none lg:text-base text-[14px] py-[5px] sm:py-2 px-3 sm:px-4  rounded-md bg-[#156b6e] text-[#fff]"
+                  onClick={() => connect()}
+                >
+                  Connect Wallet
+                </button>
+              ) : (
+                <div className="outline-none lg:text-base text-[14px] py-[5px] sm:py-2 px-3 sm:px-4  rounded-md bg-[#156b6e] text-[#fff]">
+                  {address.slice(0, 5)} {`...`} {address.slice(38, 42)}{" "}
+                  <button onClick={() => disconnect()}>Disconnect</button>
+                </div>
+              )}
+
               <button
                 className="outline-none lg:text-base text-[14px] py-[5px] sm:py-2 px-3 sm:px-4  rounded-md bg-[#156b6e] text-[#fff]"
                 onClick={() => router.push("/dashboard")}
