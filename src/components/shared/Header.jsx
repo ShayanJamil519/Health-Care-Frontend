@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import { useAddress } from "../../../AppContext";
 
 const headerLinks = [
   {
@@ -20,6 +21,7 @@ const headerLinks = [
 const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const { connectedWalletaddress, setWalletAddress } = useAddress();
 
   const [openNavbar, setOpenNavbar] = useState(false);
 
@@ -28,6 +30,7 @@ const Header = () => {
   };
 
   const { address, isConnected } = useAccount();
+  setWalletAddress(address);
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });

@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "./LayoutWrapper";
+import { AddressProvider } from "../../AppContext";
 
 const _Poppins = Poppins({
   subsets: ["latin"],
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={_Poppins.variable}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <AddressProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </AddressProvider>
       </body>
     </html>
   );
