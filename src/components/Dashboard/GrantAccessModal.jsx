@@ -2,21 +2,26 @@ import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../../../constants";
 import Input from "../Shared/Input";
 import Modal from "../Shared/Modal";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const GrantAccessModal = ({
+  id,
   openGrantAccessModal,
   setOpenGrantAccessModal,
 }) => {
+  const [sharedTo, setSharedTo] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setOpenGrantAccessModal(false);
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const signer = provider.getSigner();
-    // const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    // // const tx = await contract.grantAccess(id, sharedAddress);
+    console.log("Health Record Id: ", id, sharedTo);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+    const tx = await contract.grantAccess(id, sharedTo);
 
-    // await tx.wait();
-    // toast.success("File Shared Successfully");
+    await tx.wait();
+    toast.success("File Shared Successfully");
+    setOpenGrantAccessModal(false);
   };
   return (
     <Modal>
@@ -39,6 +44,8 @@ const GrantAccessModal = ({
             type="text"
             required
             placeholder="Please paste the user address"
+            value={sharedTo}
+            onChange={(e) => setSharedTo(e.target.value)}
           />
 
           <div className="mt-3 sm:mt-5 flex justify-center items-center ">

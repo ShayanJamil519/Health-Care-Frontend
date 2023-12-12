@@ -24,25 +24,32 @@ const UploadedHealthDataTable = () => {
   const [openGrantAccessModal, setOpenGrantAccessModal] = useState(false);
   const [dataId, setDataId] = useState(null);
   const [myHealthRecords, setMyHealthRecords] = useState([]);
+  const [healthId, setHealthId] = useState(null);
+  const [error, setError] = useState(null);
 
-  const handleGrantAccessModal = (id) => {
+  const handleGrantAccessModal = (id, healthId) => {
     setDataId(id);
     setOpenGrantAccessModal(true);
+    setHealthId(healthId);
   };
 
   useEffect(() => {
     const fetchAllHealthRecords = async () => {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      );
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
 
-      const AllHealthRecords = await contract.getAllMyHealthRecords();
-      console.log("AllHealthRecords ", AllHealthRecords);
-      setMyHealthRecords(AllHealthRecords);
+        const AllHealthRecords = await contract.getAllMyHealthRecords();
+        console.log("AllHealthRecords ", AllHealthRecords);
+        setMyHealthRecords(AllHealthRecords);
+      } catch (error) {
+        setError("You have no health record at the moment");
+      }
     };
 
     fetchAllHealthRecords();
@@ -52,10 +59,14 @@ const UploadedHealthDataTable = () => {
     <>
       {openGrantAccessModal && (
         <GrantAccessModal
+          id={healthId}
           openGrantAccessModal={openGrantAccessModal}
           setOpenGrantAccessModal={setOpenGrantAccessModal}
         />
       )}
+
+      {error ? <div>{error}</div> : null}
+
       <div className="rounded-sm font-poppins border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="max-w-full overflow-x-auto">
           <table className="w-full table-auto">
@@ -113,7 +124,9 @@ const UploadedHealthDataTable = () => {
                         </button>
                         <button
                           className="hover:text-primary"
-                          onClick={() => handleGrantAccessModal(key)}
+                          onClick={() =>
+                            handleGrantAccessModal(key, packageItem.id)
+                          }
                         >
                           <SiOpenaccess className="text-[25px]" />
                         </button>

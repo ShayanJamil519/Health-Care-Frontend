@@ -23,7 +23,7 @@ const DataForSale = ({ cardsLength }) => {
         signer
       );
 
-      const AllHealthRecords = await contract.getAllMarketRecords();
+      const AllHealthRecords = await contract.getAllMyMarketRecords();
       console.log("AllHealthRecords " + AllHealthRecords);
       setAllHealthRecords(AllHealthRecords);
     };

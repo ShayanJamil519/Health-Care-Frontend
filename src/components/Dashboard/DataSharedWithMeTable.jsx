@@ -1,26 +1,9 @@
-"use client"; // Assuming this is a comment or directive, keep it if needed
-
+"use client";
 import { SiOpenaccess } from "react-icons/si";
 import { IoEye } from "react-icons/io5";
-import GrantAccessModal from "./GrantAccessModal";
 import { useEffect, useState } from "react";
-import { contractABI, contractAddress } from "../../../constants";
 import { ethers } from "ethers";
-
-const convertUnixTimestampToDate = (unixTimestamp) => {
-  const date = new Date(unixTimestamp * 1000);
-  return date.toLocaleString();
-};
-
-const packageData = [
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
-  // Fill in other package data objects here...
-];
+import { contractABI, contractAddress } from "../../../constants";
 
 const DataSharedWithMeTable = () => {
   const [myHealthRecords, setMyHealthRecords] = useState([]);
@@ -37,20 +20,25 @@ const DataSharedWithMeTable = () => {
           signer
         );
 
-        const AllHealthRecords = await contract.getAllRecordsSharedWithMe();
-        console.log("AllHealthRecords ", AllHealthRecords);
-        setMyHealthRecords(AllHealthRecords);
+        const allHealthRecords = await contract.getAllRecordsSharedWithMe();
+        console.log("AllHealthRecords ", allHealthRecords);
+        setMyHealthRecords(allHealthRecords);
       } catch (error) {
-        setError(error.message); // Capture and store the error message
+        setError("No health records shared with you");
       }
     };
 
     fetchAllHealthRecords();
   }, []);
 
+  const convertUnixTimestampToDate = (unixTimestamp) => {
+    const date = new Date(unixTimestamp * 1000);
+    return date.toLocaleString();
+  };
+
   return (
     <>
-      {error ? <div>{`No health records shared with you`}</div> : <></>}
+      {error ? <div>{error}</div> : null}
       <div className="rounded-sm font-poppins border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="max-w-full overflow-x-auto">
           <table className="w-full table-auto">
@@ -78,24 +66,24 @@ const DataSharedWithMeTable = () => {
                 <tr key={key}>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-5">
                     <h5 className="font-medium text-black dark:text-white">
-                      {packageItem.name}
+                      {packageItem?.name}
                     </h5>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <p className="text-black dark:text-white">
-                      {packageItem.expiration}
+                      {convertUnixTimestampToDate(packageItem?.expiration)}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <p className="text-black dark:text-white">
-                      {packageItem.owner.slice(0, 20)} ......{" "}
-                      {packageItem.owner.slice(-10)}
+                      {packageItem.ownerOfData.slice(0, 20)} ......{" "}
+                      {packageItem.ownerOfData.slice(-10)}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <p className="text-black dark:text-white">
-                      {packageItem.hash.slice(0, 20)} ......{" "}
-                      {packageItem.hash.slice(-10)}
+                      {packageItem?.dataHash.slice(0, 20)} ......{" "}
+                      {packageItem?.dataHash.slice(-10)}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
