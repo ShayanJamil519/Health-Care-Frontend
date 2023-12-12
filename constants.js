@@ -1,5 +1,5 @@
 // Replace with your contract address and ABI
-export const contractAddress = "0x0CB9Be8A061521dfCd67B35F60F5f6C1A88377bc";
+export const contractAddress = "0x70294a3826eE20dbdb1BbF17d2028e54016a4806";
 export const contractABI = [
   {
     inputs: [],
@@ -418,7 +418,7 @@ export const contractABI = [
   },
   {
     inputs: [],
-    name: "getAllMyHealthRecords",
+    name: "getAllMarketRecords",
     outputs: [
       {
         components: [
@@ -468,7 +468,7 @@ export const contractABI = [
   },
   {
     inputs: [],
-    name: "getAllMyMarketRecords",
+    name: "getAllMyHealthRecords",
     outputs: [
       {
         components: [
