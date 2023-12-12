@@ -74,7 +74,7 @@ const Form = () => {
       const tx = await contract.addHealthData(
         formData.name,
         dataHash,
-        formData.price,
+        ethers.utils.parseEther(formData.price),
         Math.floor(new Date(formData.expiration).getTime() / 1000)
       );
       await tx.wait();
