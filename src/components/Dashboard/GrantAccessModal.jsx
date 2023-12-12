@@ -1,3 +1,5 @@
+import { ethers } from "ethers";
+import { contractABI, contractAddress } from "../../../constants";
 import Input from "../Shared/Input";
 import Modal from "../Shared/Modal";
 
@@ -5,6 +7,17 @@ const GrantAccessModal = ({
   openGrantAccessModal,
   setOpenGrantAccessModal,
 }) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // setOpenGrantAccessModal(false)
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, contractABI, signer);
+    // const tx = await contract.grantAccess(id, sharedAddress);
+
+    // await tx.wait();
+    // toast.success("File Shared Successfully");
+  };
   return (
     <Modal>
       <div
@@ -16,7 +29,7 @@ const GrantAccessModal = ({
         }}
         className=" p-5 md:p-7 bg-[#fff] text-center border-2 border-[#000] font-poppins w-[90%] sm:w-[60%] md:w-[40%]  mx-auto"
       >
-        <form className="text-left">
+        <form className="text-left" onSubmit={handleSubmit}>
           <h1 className="text-2xl font-semibold mb-5 font-poppins text-center">
             Grant access to other user
           </h1>
@@ -31,7 +44,6 @@ const GrantAccessModal = ({
           <div className="mt-3 sm:mt-5 flex justify-center items-center ">
             <button
               type="submit"
-              onClick={() => setOpenGrantAccessModal(false)}
               className="rounded-[5px] w-full bg-[#156b6e]  py-2 text-sm text-[#fff] border-none  sm:text-base "
             >
               Grant Access

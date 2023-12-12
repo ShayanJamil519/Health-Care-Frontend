@@ -1,8 +1,16 @@
-"use client";
+"use client"; // Assuming this is a comment or directive, keep it if needed
+
 import { SiOpenaccess } from "react-icons/si";
 import { IoEye } from "react-icons/io5";
 import GrantAccessModal from "./GrantAccessModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { contractABI, contractAddress } from "../../../constants";
+import { ethers } from "ethers";
+
+const convertUnixTimestampToDate = (unixTimestamp) => {
+  const date = new Date(unixTimestamp * 1000);
+  return date.toLocaleString();
+};
 
 const packageData = [
   {
@@ -11,42 +19,39 @@ const packageData = [
     owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
     hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
   },
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
-  {
-    name: "ABCD",
-    expiration: `Jan 13,2023`,
-    owner: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-    hash: "0x1231452525298148-0979078078908dakhaklfholafnlfa",
-  },
+  // Fill in other package data objects here...
 ];
 
 const DataSharedWithMeTable = () => {
+  const [myHealthRecords, setMyHealthRecords] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAllHealthRecords = async () => {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        );
+
+        const AllHealthRecords = await contract.getAllRecordsSharedWithMe();
+        console.log("AllHealthRecords ", AllHealthRecords);
+        setMyHealthRecords(AllHealthRecords);
+      } catch (error) {
+        setError(error.message); // Capture and store the error message
+      }
+    };
+
+    fetchAllHealthRecords();
+  }, []);
+
   return (
     <>
-      <div className="rounded-sm  font-poppins border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+      {error ? <div>{`No health records shared with you`}</div> : <></>}
+      <div className="rounded-sm font-poppins border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
         <div className="max-w-full overflow-x-auto">
           <table className="w-full table-auto">
             <thead>
@@ -54,7 +59,6 @@ const DataSharedWithMeTable = () => {
                 <th className="max-w-[120px] py-4 px-4 font-semibold text-lg text-black dark:text-white xl:pl-5">
                   Name
                 </th>
-
                 <th className="max-w-[120px] py-4 px-4 font-semibold text-lg text-black dark:text-white">
                   Expiration
                 </th>
@@ -70,14 +74,13 @@ const DataSharedWithMeTable = () => {
               </tr>
             </thead>
             <tbody>
-              {packageData.map((packageItem, key) => (
+              {myHealthRecords.map((packageItem, key) => (
                 <tr key={key}>
                   <td className="border-b border-[#eee] py-5 px-4 pl-9 dark:border-strokedark xl:pl-5">
                     <h5 className="font-medium text-black dark:text-white">
                       {packageItem.name}
                     </h5>
                   </td>
-
                   <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                     <p className="text-black dark:text-white">
                       {packageItem.expiration}
