@@ -1,5 +1,5 @@
 // Replace with your contract address and ABI
-export const contractAddress = "0x30f04d421A339651ee1463bB5D2c17bAb61b519a";
+export const contractAddress = "0x0CB9Be8A061521dfCd67B35F60F5f6C1A88377bc";
 export const contractABI = [
   {
     inputs: [],
@@ -313,52 +313,14 @@ export const contractABI = [
       },
     ],
     name: "addHealthData",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "allUsersData",
     outputs: [
       {
-        internalType: "string",
-        name: "name",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "dataHash",
-        type: "string",
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256",
-      },
-      {
         internalType: "bool",
-        name: "isForSale",
+        name: "",
         type: "bool",
       },
-      {
-        internalType: "address",
-        name: "ownerOfData",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "expiration",
-        type: "uint256",
-      },
     ],
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -430,6 +392,19 @@ export const contractABI = [
   },
   {
     inputs: [],
+    name: "contractOwner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "decimals",
     outputs: [
       {
@@ -442,27 +417,8 @@ export const contractABI = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
-      },
-    ],
-    name: "getAccessList",
-    outputs: [
-      {
-        internalType: "address[][]",
-        name: "",
-        type: "address[][]",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
-    name: "getAllUsersData",
+    name: "getAllMyHealthRecords",
     outputs: [
       {
         components: [
@@ -502,7 +458,7 @@ export const contractABI = [
             type: "address[]",
           },
         ],
-        internalType: "struct HealthcareDataTokenM.HealthData[]",
+        internalType: "struct HealthcareDataToken.HealthData[]",
         name: "",
         type: "tuple[]",
       },
@@ -511,38 +467,8 @@ export const contractABI = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_owner",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_spender",
-        type: "address",
-      },
-    ],
-    name: "getAllowance",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
-      },
-    ],
-    name: "getHealthDataOfSinglePatient",
+    inputs: [],
+    name: "getAllMyMarketRecords",
     outputs: [
       {
         components: [
@@ -582,7 +508,57 @@ export const contractABI = [
             type: "address[]",
           },
         ],
-        internalType: "struct HealthcareDataTokenM.HealthData[]",
+        internalType: "struct HealthcareDataToken.HealthData[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllRecordsSharedWithMe",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "dataHash",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "price",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "isForSale",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "ownerOfData",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "expiration",
+            type: "uint256",
+          },
+          {
+            internalType: "address[]",
+            name: "accessList",
+            type: "address[]",
+          },
+        ],
+        internalType: "struct HealthcareDataToken.HealthData[]",
         name: "",
         type: "tuple[]",
       },
@@ -593,55 +569,24 @@ export const contractABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
-      },
-    ],
-    name: "getPatientBalance",
-    outputs: [
-      {
         internalType: "uint256",
-        name: "",
+        name: "id",
         type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getTotalSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
       },
       {
         internalType: "address",
         name: "_to",
         type: "address",
       },
-      {
-        internalType: "uint256",
-        name: "_dataId",
-        type: "uint256",
-      },
     ],
     name: "grantAccess",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },
@@ -659,58 +604,14 @@ export const contractABI = [
     type: "function",
   },
   {
-    inputs: [],
-    name: "locked",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "name",
-    outputs: [
-      {
-        internalType: "string",
-        name: "",
-        type: "string",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
       {
         internalType: "uint256",
         name: "",
         type: "uint256",
       },
     ],
-    name: "patientData",
+    name: "healths",
     outputs: [
       {
         internalType: "string",
@@ -747,6 +648,32 @@ export const contractABI = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "name",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "owner",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -767,29 +694,6 @@ export const contractABI = [
   {
     inputs: [],
     name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_dataId",
-        type: "uint256",
-      },
-    ],
-    name: "revokeAccess",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -882,34 +786,6 @@ export const contractABI = [
       },
     ],
     name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_patient",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_dataId",
-        type: "uint256",
-      },
-      {
-        internalType: "address",
-        name: "_to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
-      },
-    ],
-    name: "transferWithAccess",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
