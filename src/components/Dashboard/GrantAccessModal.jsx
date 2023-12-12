@@ -9,11 +9,11 @@ const GrantAccessModal = ({
 }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setOpenGrantAccessModal(false)
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    // const tx = await contract.grantAccess(id, sharedAddress);
+    setOpenGrantAccessModal(false);
+    // const provider = new ethers.providers.Web3Provider(window.ethereum);
+    // const signer = provider.getSigner();
+    // const contract = new ethers.Contract(contractAddress, contractABI, signer);
+    // // const tx = await contract.grantAccess(id, sharedAddress);
 
     // await tx.wait();
     // toast.success("File Shared Successfully");
