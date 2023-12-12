@@ -53,7 +53,7 @@ const Card = ({ data }) => {
   };
 
   return (
-    <div className="max-w-[30%] rounded-lg shadow-md hover:shadow-xl duration-800  font-poppins py-7 px-5 text-center">
+    <div className="lg:max-w-[30%] md:w-[40%] sm:w-[60%] w-[100%] rounded-lg shadow-md hover:shadow-xl duration-800  font-poppins py-7 px-5 text-center">
       <p className="flex justify-start items-center gap-3 mb-1">
         <span className="font-semibold">Name: </span>
         {data?.name}
@@ -71,7 +71,7 @@ const Card = ({ data }) => {
 
         {address == data?.ownerOfData
           ? "You"
-          : `${data?.ownerOfData.slice(0, 20)}...${data?.ownerOfData.slice(
+          : `${data?.ownerOfData.slice(0, 8)}...${data?.ownerOfData.slice(
               -10
             )}`}
       </p>
@@ -86,7 +86,7 @@ const Card = ({ data }) => {
       <p className="flex justify-start items-center gap-3 mb-1">
         <span className="font-semibold">Hash: </span>
 
-        {`${data?.dataHash.slice(0, 20)}...${data?.dataHash.slice(-10)}`}
+        {`${data?.dataHash.slice(0, 8)}...${data?.dataHash.slice(-10)}`}
       </p>
       <button
         className="mt-4 border-none rounded-lg w-full py-2 bg-[#156b6e] text-[#fff]"

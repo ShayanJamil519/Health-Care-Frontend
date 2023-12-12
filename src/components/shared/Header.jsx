@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useAddress } from "../../../AppContext";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const headerLinks = [
   {
@@ -42,14 +43,13 @@ const Header = () => {
   // }, []);
 
   return (
-    <div className=" bg-[#ffffff] font-poppins py-3">
+    <div className=" bg-[#ffffff] font-poppins py-3 relative">
       <div className="w-[90%] md:w-[90%] mx-auto flex justify-between items-center">
         <div className="flex w-full justify-between items-center gap-16">
           <Link
             href="/"
             className="lg:flex justify-start items-center gap-3 hidden"
           >
-            <img src="/logo.png" alt="logo" className="w-[50px]" />
             <p className="text-[#156b6e] font-semibold font-poppins">
               MediChain Access
             </p>
@@ -58,7 +58,6 @@ const Header = () => {
             href="/"
             className="lg:hidden flex justify-start items-center gap-3"
           >
-            <img src="logo__small.png" alt="logo" className="w-[50px]" />
             <p className="text-[#156b6e] font-semibold font-poppins">
               MediChain Access
             </p>
@@ -122,13 +121,18 @@ const Header = () => {
                   </button>
                 </div>
               )}
+              <GiHamburgerMenu
+                className="lg:hidden block cursor-pointer"
+                onClick={handleNavbar}
+                fontSize={30}
+              />
 
-              <img
+              {/* <img
                 src="/images/toggle__open.png"
                 alt="logo"
                 className="lg:hidden block cursor-pointer"
                 onClick={handleNavbar}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -137,10 +141,10 @@ const Header = () => {
       {/* Mobile Dawer */}
       {openNavbar && (
         <div
-          className="block  basis-full overflow-hidden  lg:hidden w-[90%] mx-auto"
+          className="absolute top-20 left-0 right-0  basis-full overflow-hidden bg-white rounded-md  lg:hidden sm:w-[40%] w-[90%] mx-auto"
           style={{ height: "auto" }}
         >
-          <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ">
+          <ul className="mb-4 mt-2 flex flex-col items-center justify-center gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 ">
             {headerLinks.map((item) => (
               <li
                 key={item.linkTo}

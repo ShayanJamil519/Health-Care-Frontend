@@ -37,7 +37,7 @@ const DataForSale = ({ cardsLength }) => {
         Health Data For Sale
       </h1>
       {/* Cards */}
-      <div className="mt-10 w-[90%] mx-auto flex justify-center items-center gap-10  flex-wrap">
+      <div className="mt-10 w-[90%] mx-auto flex md:flex-row flex-wrap flex-col justify-center items-center gap-10  ">
         {/* {Array.from({ length: cardsLength }).map((item, index) => ( */}
         {allHealthRecords.map((item, index) => (
           <Card key={index} data={item} />
