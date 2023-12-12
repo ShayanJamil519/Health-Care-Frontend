@@ -4,6 +4,7 @@ import Input from "../Shared/Input";
 import Modal from "../Shared/Modal";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import RequestLoader from "../shared/RequestLoader";
 
 const GrantAccessModal = ({
   id,
@@ -11,17 +12,30 @@ const GrantAccessModal = ({
   setOpenGrantAccessModal,
 }) => {
   const [sharedTo, setSharedTo] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Health Record Id: ", id, sharedTo);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    const tx = await contract.grantAccess(id, sharedTo);
+    setLoading(true);
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
+      const tx = await contract.grantAccess(id, sharedTo);
 
-    await tx.wait();
-    toast.success("File Shared Successfully");
-    setOpenGrantAccessModal(false);
+      await tx.wait();
+      toast.success("File Shared Successfully");
+      setOpenGrantAccessModal(false);
+      setLoading(false);
+    } catch (error) {
+      toast.error("Network Error");
+      setLoading(false);
+    }
   };
   return (
     <Modal>
@@ -53,7 +67,7 @@ const GrantAccessModal = ({
               type="submit"
               className="rounded-[5px] w-full bg-[#156b6e]  py-2 text-sm text-[#fff] border-none  sm:text-base "
             >
-              Grant Access
+              {loading ? <RequestLoader /> : " Grant Access"}
             </button>
           </div>
         </form>

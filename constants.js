@@ -1,5 +1,5 @@
 // Replace with your contract address and ABI
-export const contractAddress = "0xD4Ef5afde516164B4a6522a4AA8b3DaE90085E02";
+export const contractAddress = "0x38BC90308Ea6c9FCf3B6D2F2727855E1156e8394";
 export const contractABI = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -260,7 +260,7 @@ export const contractABI = [
   },
   {
     inputs: [],
-    name: "getAllMyHealthRecords",
+    name: "getAllMarketRecords",
     outputs: [
       {
         components: [
@@ -269,6 +269,7 @@ export const contractABI = [
           { internalType: "string", name: "dataHash", type: "string" },
           { internalType: "uint256", name: "price", type: "uint256" },
           { internalType: "bool", name: "isForSale", type: "bool" },
+          { internalType: "bool", name: "isBought", type: "bool" },
           { internalType: "address", name: "ownerOfData", type: "address" },
           { internalType: "uint256", name: "expiration", type: "uint256" },
           { internalType: "address[]", name: "accessList", type: "address[]" },
@@ -283,7 +284,7 @@ export const contractABI = [
   },
   {
     inputs: [],
-    name: "getAllMyMarketRecords",
+    name: "getAllMyHealthRecords",
     outputs: [
       {
         components: [
@@ -292,6 +293,7 @@ export const contractABI = [
           { internalType: "string", name: "dataHash", type: "string" },
           { internalType: "uint256", name: "price", type: "uint256" },
           { internalType: "bool", name: "isForSale", type: "bool" },
+          { internalType: "bool", name: "isBought", type: "bool" },
           { internalType: "address", name: "ownerOfData", type: "address" },
           { internalType: "uint256", name: "expiration", type: "uint256" },
           { internalType: "address[]", name: "accessList", type: "address[]" },
@@ -315,6 +317,7 @@ export const contractABI = [
           { internalType: "string", name: "dataHash", type: "string" },
           { internalType: "uint256", name: "price", type: "uint256" },
           { internalType: "bool", name: "isForSale", type: "bool" },
+          { internalType: "bool", name: "isBought", type: "bool" },
           { internalType: "address", name: "ownerOfData", type: "address" },
           { internalType: "uint256", name: "expiration", type: "uint256" },
           { internalType: "address[]", name: "accessList", type: "address[]" },
@@ -329,7 +332,7 @@ export const contractABI = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "id", type: "uint256" },
+      { internalType: "uint256", name: "_id", type: "uint256" },
       { internalType: "address", name: "_to", type: "address" },
     ],
     name: "grantAccess",
@@ -353,10 +356,21 @@ export const contractABI = [
       { internalType: "string", name: "dataHash", type: "string" },
       { internalType: "uint256", name: "price", type: "uint256" },
       { internalType: "bool", name: "isForSale", type: "bool" },
+      { internalType: "bool", name: "isBought", type: "bool" },
       { internalType: "address", name: "ownerOfData", type: "address" },
       { internalType: "uint256", name: "expiration", type: "uint256" },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address[]", name: "array", type: "address[]" },
+      { internalType: "address", name: "target", type: "address" },
+    ],
+    name: "isAddressInArray",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "pure",
     type: "function",
   },
   {

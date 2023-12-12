@@ -1,16 +1,18 @@
 import { ethers } from "ethers";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { contractABI, contractAddress } from "../../../constants";
+import RequestLoader from "./RequestLoader";
 
 const convertUnixTimestampToDate = (unixTimestamp) => {
   const date = new Date(unixTimestamp * 1000); // Convert Unix timestamp to milliseconds
   return date.toLocaleString(); // Adjust format as needed using Date methods
 };
 
-const Card = ({ data }) => {
+const Card = ({ data, refresh }) => {
   const { address, isConnected } = useAccount();
+  const [loading, setLoading] = useState(false);
 
   const buyData = async () => {
     if (address == data?.ownerOfData) {
@@ -19,7 +21,14 @@ const Card = ({ data }) => {
     } else {
       // call smart contract function
       try {
-        console.log("Hello: ", data.id, data.ownerOfData);
+        setLoading(true);
+
+        console.log(
+          "Hello: ",
+          data.id,
+          data.ownerOfData,
+          data?.price.toString()
+        );
         // Making connection to the blockchain, getting signer wallet address and connecting to our smart contract
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -29,15 +38,15 @@ const Card = ({ data }) => {
           signer
         );
 
-        // Convert the price to Wei
-        const recordPrice = ethers.utils.parseUnits(
-          data?.price.toString(),
-          "ether"
-        );
+        // // Convert the price to Wei
+        // const recordPrice = ethers.utils.parseUnits(
+        //   data?.price.toString(),
+        //   "ether"
+        // );
 
         console.log("Converted Price: ", data?.price.toString());
 
-        // calling our smart contract function
+        // // calling our smart contract function
         const tx = await contract.purchaseData(data.ownerOfData, data.id, {
           from: address,
           value: data?.price.toString(),
@@ -45,9 +54,12 @@ const Card = ({ data }) => {
 
         await tx.wait();
         toast.success("Health Data Uploaded Successfully");
+        setLoading(false);
+        refresh(true);
       } catch (error) {
         console.error("Transaction error: ", error);
         toast.error("Network Error!");
+        setLoading(false);
       }
     }
   };
@@ -92,7 +104,7 @@ const Card = ({ data }) => {
         className="mt-4 border-none rounded-lg w-full py-2 bg-[#156b6e] text-[#fff]"
         onClick={buyData}
       >
-        Buy Data
+        {loading ? <RequestLoader /> : "Buy Data"}
       </button>
     </div>
   );
