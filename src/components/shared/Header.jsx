@@ -2,7 +2,6 @@
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useAddress } from "../../../AppContext";
@@ -36,11 +35,11 @@ const Header = () => {
   });
   const { disconnect } = useDisconnect();
 
-  useEffect(() => {
-    if (localStorage.getItem("walletConnected") === "true") {
-      connect();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("walletConnected") === "true") {
+  //     connect();
+  //   }
+  // }, []);
 
   return (
     <div className=" bg-[#ffffff] font-poppins py-3">

@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { contractABI, contractAddress } from "../../../constants";
 import { ethers } from "ethers";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
 
 const DataForSale = ({ cardsLength }) => {
   const [allHealthRecords, setAllHealthRecords] = useState([]);
+  const { address, isConnected } = useAccount();
 
   useEffect(() => {
     const fetchAllHealthRecords = async () => {
+      // if (!address) {
+      //   return;
+      // }
       // Connect to the contract using ethers.js
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
