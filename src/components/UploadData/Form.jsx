@@ -81,7 +81,8 @@ const Form = () => {
       toast.success("Health Data Uploaded Successfully");
       setLoading(false);
     } catch (error) {
-      toast.error(error.message);
+      console.log("error: ", error);
+      toast.error("Network Error");
     } finally {
       setLoading(false);
     }
