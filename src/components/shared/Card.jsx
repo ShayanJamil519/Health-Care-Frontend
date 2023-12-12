@@ -1,22 +1,26 @@
 import React from "react";
 
-const Card = () => {
+const Card = ({ data }) => {
   return (
     <div className="w-[30%] rounded-lg shadow-md hover:shadow-xl duration-800  font-poppins py-7 px-5 text-center">
       <p className="flex justify-start items-center gap-3 mb-1">
-        <span className="font-semibold">Name: </span>ABC Data
+        <span className="font-semibold">Name: </span>
+        {data?.name}
       </p>
       <p className="flex justify-start items-center gap-3 mb-1">
-        <span className="font-semibold">Expiration: </span>08/07/05
+        <span className="font-semibold">Expiration: </span>
+        {data?.expiration}
       </p>
       <p className="flex justify-start items-center gap-3 mb-1">
-        <span className="font-semibold">Owner: </span>0x1234
+        <span className="font-semibold">Owner: </span>
+        {data?.ownerOfData}
       </p>
       <p className="flex justify-start items-center gap-3 mb-1">
-        <span className="font-semibold">Price: </span> 0.12 ETH
+        <span className="font-semibold">Price: </span>
+        {data?.price} ETH
       </p>
       <p className="flex justify-start items-center gap-3 mb-1">
-        <span className="font-semibold">Hash: </span> 0hkjhl14190809
+        <span className="font-semibold">Hash: </span> {data?.dataHash}
       </p>
       <button className="mt-4 border-none rounded-lg w-full py-2 bg-[#156b6e] text-[#fff]">
         Buy Data
