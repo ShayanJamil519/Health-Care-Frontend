@@ -49,6 +49,14 @@ const Form = () => {
     event.preventDefault();
 
     try {
+      const currentTimestamp = Date.now();
+      const expirationTimestamp = Date.parse(formData.expiration);
+
+      if (expirationTimestamp <= currentTimestamp) {
+        toast.error("Please select an expiration time in the future.");
+        return;
+      }
+
       // Checking if someone clicks upload certicate submit button without selecting a file to make sure it gives error
       if (!uploadDataFile) {
         toast.error("Please select a data file to upload.");
