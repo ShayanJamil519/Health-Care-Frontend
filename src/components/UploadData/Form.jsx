@@ -3,27 +3,12 @@ import React, { useState } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import Input from "../shared/Input";
 import { ethers } from "ethers";
-import { create } from "ipfs-http-client";
 import { contractABI, contractAddress } from "../../../constants";
 import { toast } from "react-toastify";
 import RequestLoader from "../shared/RequestLoader";
+import { uploadFileToIPFS } from "@/utils/UploadtoIpfs";
 
-const projectId = "2NeEZqOeOOi9fQgDL6VoIMwKIZY";
-const projectSecret = "b4ae65044a6e29c52c4091bf29a976b2";
-
-const auth =
-  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
-
-const ipfs = create({
-  host: "ipfs.infura.io",
-  port: 5001,
-  protocol: "https",
-  headers: {
-    authorization: auth,
-  },
-});
-
-export default function Form() {
+const Form = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -32,13 +17,14 @@ export default function Form() {
 
   const [loading, setLoading] = useState(false);
   const [uploadDataFile, setUploadDataFile] = useState("");
+  const [uploadDataFileHash, setUploadDataFileHash] = useState("");
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleDataFileChange = (event) => {
+  const handleDataFileChange = async (event) => {
     if (event.target.files.length > 0) {
       setUploadDataFile(event.target.files[0]);
     }
@@ -64,10 +50,14 @@ export default function Form() {
       }
 
       setLoading(true);
-      // Adding our file to ipfs
-      const added = await ipfs.add(uploadDataFile);
-      let dataHash = added.path;
-      console.log("dataHash: ", dataHash);
+
+      let dataHash;
+      if (uploadDataFile != "") {
+        const imageResponse = await uploadFileToIPFS(uploadDataFile);
+        if (imageResponse.data && imageResponse.data.IpfsHash) {
+          dataHash = imageResponse.data.IpfsHash;
+        }
+      }
 
       // Making connection to the blockchain, getting signer wallet address and connecting to our smart contract
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -170,4 +160,6 @@ export default function Form() {
       </form>
     </div>
   );
-}
+};
+
+export default Form;
