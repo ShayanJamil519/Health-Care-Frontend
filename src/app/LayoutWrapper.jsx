@@ -2,8 +2,8 @@
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { usePathname } from "next/navigation";
-import Header from "@/components/Shared/Header";
-import Footer from "@/components/Shared/Footer";
+import Header from "../components/Shared/Header";
+import Footer from "../components/shared/Footer";
 
 import { WagmiConfig, createConfig, mainnet, sepolia } from "wagmi";
 import { createPublicClient, http } from "viem";
