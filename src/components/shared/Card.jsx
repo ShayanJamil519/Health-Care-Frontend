@@ -60,7 +60,7 @@ const Card = ({ data, refresh }) => {
         });
 
         await tx.wait();
-        toast.success("Health Data Uploaded Successfully");
+        toast.success("Health Data Bought Successfully");
         setLoading(false);
         refresh(true);
       } catch (error) {
