@@ -1,9 +1,6 @@
 "use client";
 import Hero from "@/components/Home/Hero";
-import DataForSale from "@/components/Shared/DataForSale";
-import { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import { contractABI, contractAddress } from "../../constants";
+import DataForSale from "@/components/shared/DataForSale";
 
 export default function Home() {
   return (

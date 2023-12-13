@@ -1,5 +1,5 @@
-import DataForSale from "@/components/Shared/DataForSale";
-import Hero from "@/components/Shared/Hero";
+import DataForSale from "@/components/shared/DataForSale";
+import Hero from "@/components/shared/Hero";
 import React from "react";
 
 const page = () => {
