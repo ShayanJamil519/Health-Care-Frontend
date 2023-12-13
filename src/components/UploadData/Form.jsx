@@ -23,7 +23,7 @@ const ipfs = create({
   },
 });
 
-const Form = () => {
+export default function Form() {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -170,6 +170,4 @@ const Form = () => {
       </form>
     </div>
   );
-};
-
-export default Form;
+}
