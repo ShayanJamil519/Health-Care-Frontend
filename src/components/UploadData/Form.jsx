@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { IoIosArrowRoundForward } from "react-icons/io";
-import Input from "../Shared/Input";
+import Input from "../shared/Input";
 import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { contractABI, contractAddress } from "../../../constants";
 import { toast } from "react-toastify";
-import RequestLoader from "../Shared/RequestLoader";
+import RequestLoader from "../shared/RequestLoader";
 
 const projectId = "2NeEZqOeOOi9fQgDL6VoIMwKIZY";
 const projectSecret = "b4ae65044a6e29c52c4091bf29a976b2";

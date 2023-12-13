@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../../../constants";
-import Input from "../Shared/Input";
-import Modal from "../Shared/Modal";
+import Input from "../shared/Input";
+import Modal from "../shared/Modal";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import RequestLoader from "../shared/RequestLoader";
