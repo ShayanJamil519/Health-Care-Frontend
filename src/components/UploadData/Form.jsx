@@ -82,7 +82,8 @@ const Form = () => {
       setLoading(false);
     } catch (error) {
       console.log("error: ", error);
-      toast.error("Network Error");
+      // toast.error("Network Error");
+      toast.error(error);
     } finally {
       setLoading(false);
     }

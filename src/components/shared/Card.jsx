@@ -14,6 +14,13 @@ const Card = ({ data, refresh }) => {
   const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState(false);
 
+  const seeFile = (hash) => {
+    window.open(
+      `https://gateway.pinata.cloud/ipfs/${data?.dataHash}`,
+      "_blank"
+    );
+  };
+
   const buyData = async () => {
     if (address == data?.ownerOfData) {
       toast.warn("You are the owner of this file");
@@ -97,8 +104,10 @@ const Card = ({ data, refresh }) => {
       </p>
       <p className="flex justify-start items-center gap-3 mb-1">
         <span className="font-semibold">Hash: </span>
-
-        {`${data?.dataHash.slice(0, 8)}...${data?.dataHash.slice(-10)}`}
+        <span onClick={seeFile} className="underline cursor-pointer">
+          {" "}
+          {`${data?.dataHash.slice(0, 8)}...${data?.dataHash.slice(-10)}`}
+        </span>{" "}
       </p>
       <button
         className="mt-4 border-none rounded-lg w-full py-2 bg-[#156b6e] text-[#fff]"
