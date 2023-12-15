@@ -29,7 +29,7 @@ const GrantAccessModal = ({
       const tx = await contract.grantAccess(id, sharedTo);
 
       await tx.wait();
-      toast.success("File Shared Successfully");
+      toast.success("Data Granted Successfully");
       setOpenGrantAccessModal(false);
       setLoading(false);
     } catch (error) {

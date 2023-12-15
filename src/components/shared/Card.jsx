@@ -23,7 +23,7 @@ const Card = ({ data, refresh }) => {
 
   const buyData = async () => {
     if (address == data?.ownerOfData) {
-      toast.warn("You are the owner of this file");
+      toast.error("You are the owner of this file");
       return;
     } else {
       // call smart contract function
@@ -44,12 +44,6 @@ const Card = ({ data, refresh }) => {
           contractABI,
           signer
         );
-
-        // // Convert the price to Wei
-        // const recordPrice = ethers.utils.parseUnits(
-        //   data?.price.toString(),
-        //   "ether"
-        // );
 
         console.log("Converted Price: ", data?.price.toString());
 
